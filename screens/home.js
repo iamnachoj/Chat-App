@@ -5,7 +5,7 @@ import {globalStyles} from '../styles/global';
 export default function Home({navigation}) {
    
    const pressHandler = () => {
-      navigation.navigate('Reviews')
+      navigation.navigate('About')
    }
 
    return (

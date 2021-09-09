@@ -4,7 +4,7 @@ import AppLoading from 'expo-app-loading';
 
 //components
 import Home from './screens/home';
-import ReviewDetails from './screens/reviewDetails';
+import About from './screens/about';
 
 // navigator
 import {createStackNavigator} from '@react-navigation/stack';
@@ -28,7 +28,7 @@ export default function App() {
       <Stack.Navigator>
         {/* it automatically adds a navigation prop */}
         <Stack.Screen name='Home' component={Home}/> 
-        <Stack.Screen name='Reviews' component={ReviewDetails}/>
+        <Stack.Screen name='About' component={About}/>
       </Stack.Navigator>
       </NavigationContainer>
     );
