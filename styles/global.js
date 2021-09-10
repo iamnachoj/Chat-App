@@ -6,7 +6,7 @@ export const globalStyles = StyleSheet.create({
     padding: 50
   },
   dashboardContainer:{
-    height: 160,
+    height: 260,
     width: 300,
     padding: 10,
     backgroundColor: '#fff'
@@ -31,5 +31,30 @@ export const globalStyles = StyleSheet.create({
   image: {
     flex: 1,
     justifyContent: "center"
+  },
+  colorPickerContainer: {
+    padding: 10,
+  },
+  colorPicker: {
+    flexDirection: "row",
+    marginTop: 15,
+  },
+  colors: {
+    width: 45,
+    height: 45,
+    marginRight: 20,
+    borderRadius: 45 / 2,
+  },
+  pink: {
+    backgroundColor: "#FFAEBC",
+  },
+  blue: {
+    backgroundColor: "#A0E7E5",
+  },
+  mint: {
+    backgroundColor: "#B4F8C8",
+  },
+  yellow: {
+    backgroundColor: "#FBE7C6",
   }
 });
