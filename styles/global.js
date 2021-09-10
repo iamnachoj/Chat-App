@@ -5,6 +5,12 @@ export const globalStyles = StyleSheet.create({
     flex: 1 ,
     padding: 50
   },
+  dashboardContainer:{
+    height: 160,
+    width: 300,
+    padding: 10,
+    backgroundColor: '#fff'
+  },
   titleText:{
     fontFamily: 'nunito-bold',
     fontSize: 18,
@@ -21,5 +27,9 @@ export const globalStyles = StyleSheet.create({
     padding: 8,
     marginTop: 20,
     marginBottom: 10
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center"
   }
 });
