@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, KeyboardAvoidingView,  Text, Button, Platform } from 'react-native';
-import { GiftedChat } from "react-native-gifted-chat";
+import { GiftedChat, Bubble } from "react-native-gifted-chat";
+import {globalStyles} from '../styles/global';
 
 export default class Chat extends React.Component {
   constructor() {
@@ -22,8 +23,27 @@ export default class Chat extends React.Component {
             avatar: 'https://placeimg.com/140/140/any',
           },
         },
+        {
+          _id: 2,
+          text: 'This is a system message',
+          createdAt: new Date(),
+          system: true,
+         },
       ],
     })
+  }
+  
+  renderBubble(props) {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            backgroundColor: '#333'
+          }
+        }}
+      />
+    )
   }
 
   onSend(messages = []) {
@@ -38,8 +58,9 @@ export default class Chat extends React.Component {
       this.props.navigation.setOptions({title: name});
 
       return (
-      <View  style={{flex: 1, backgroundColor: bgColor}}>
+      <View  style={{flex: 1, backgroundColor: bgColor, paddingBottom: 20, paddingHorizontal: 10}}>
         <GiftedChat
+        renderBubble={this.renderBubble.bind(this)}
         messages={this.state.messages}
         onSend={(messages) => this.onSend(messages)}
         user={{
