@@ -56,10 +56,10 @@ export const globalStyles = StyleSheet.create({
     borderRadius: 45 / 2,
   },
   pink: {
-    backgroundColor: "#FFAEBC",
+    backgroundColor: "#FFD2F8",
   },
   blue: {
-    backgroundColor: "#A0E7E5",
+    backgroundColor: "#BED7FF",
   },
   mint: {
     backgroundColor: "#B4F8C8",

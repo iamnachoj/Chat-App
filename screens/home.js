@@ -25,13 +25,12 @@ export default class Screen1 extends React.Component {
               <Text style={globalStyles.chooseColor}>Choose Background Color:</Text>
               <View style={globalStyles.colorPicker}>
                 <TouchableOpacity
-                  //#090C08; #474056; #8A95A5; #B9C6AE colors
-                  style={[globalStyles.colors, globalStyles.pink]}
-                  onPress={() => this.setState({ bgColor: "#FFAEBC" })}
+                  style={[globalStyles.colors, globalStyles.blue]}
+                  onPress={() => this.setState({ bgColor: "#BED7FF" })}
                 ></TouchableOpacity>
                 <TouchableOpacity
-                  style={[globalStyles.colors, globalStyles.blue]}
-                  onPress={() => this.setState({ bgColor: "#A0E7E5" })}
+                  style={[globalStyles.colors, globalStyles.pink]}
+                  onPress={() => this.setState({ bgColor: "#FFD2F8" })}
                 ></TouchableOpacity>
                 <TouchableOpacity
                   style={[globalStyles.colors, globalStyles.mint]}
@@ -39,7 +38,7 @@ export default class Screen1 extends React.Component {
                 ></TouchableOpacity>
                 <TouchableOpacity
                   style={[globalStyles.colors, globalStyles.yellow]}
-                  onPress={() => this.setState({ bgColor: "#FBE7C6" })}
+                  onPress={() => this.setState({ bgColor: "#fffde7" })}
                 ></TouchableOpacity>
               </View>
             </View>
