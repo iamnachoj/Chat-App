@@ -2,7 +2,6 @@ import React from 'react';
 import {View, KeyboardAvoidingView,  Text, Button, Platform } from 'react-native';
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import {globalStyles} from '../styles/global';
-
 //firebase
 import firebase from "firebase";
 import("firebase/firestore");
@@ -37,9 +36,9 @@ export default class Chat extends React.Component {
   }
    // after the chat component is mounted, we store these 2 messages as an example, changing the current state of messages (empty array)
    componentDidMount() {
-    const name = this.props.route.params.username;
+    const name = this.props.route.params.name;
     this.props.navigation.setOptions({ title: name });
-    
+
     this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
         firebase.auth().signInAnonymously();
@@ -71,10 +70,21 @@ export default class Chat extends React.Component {
       _id: message._id,
       text: message.text,
       createdAt: message.createdAt,
-      user: message.user,
+      user: message.user
     });
   }
-   
+   // appends new messages to the current list of messages.
+   onSend(messages = []) {
+    this.setState(
+      (previousState) => ({
+        messages: GiftedChat.append(previousState.messages, messages),
+      }),
+      () => {
+        this.addMessage();
+      }
+    );
+  }
+
   // a funtion that changes the color of the bubble of your own messages when you send them
   renderBubble(props) {
     return (
@@ -88,18 +98,7 @@ export default class Chat extends React.Component {
       />
     )
   }
-  // appends new messages to the current list of messages.
-  onSend(messages = []) {
-    this.setState(
-      (previousState) => ({
-        messages: GiftedChat.append(previousState.messages, messages),
-      }),
-      () => {
-        this.addMessage();
-      }
-    );
-  }
-  
+
   onCollectionUpdate = (querySnapshot) => {
     const messages = [];
     // go through each document
@@ -120,7 +119,7 @@ export default class Chat extends React.Component {
       messages,
     });
   };
-  
+
   componentWillUnmount() {
     // stop authentication
     this.authUnsubscribe();
