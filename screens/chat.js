@@ -3,6 +3,10 @@ import {View, KeyboardAvoidingView,  Text, Button, Platform } from 'react-native
 import { GiftedChat, Bubble } from "react-native-gifted-chat";
 import {globalStyles} from '../styles/global';
 
+//firebase
+const firebase = require('firebase');
+require('firebase/firestore');
+
 export default class Chat extends React.Component {
   // this is just mock data to store messages
   constructor() {
