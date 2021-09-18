@@ -6,6 +6,9 @@ import {globalStyles} from '../styles/global';
 import firebase from "firebase";
 import("firebase/firestore");
 
+//SyncStorage
+import { AsyncStorage } from 'react-native';
+
 export default class Chat extends React.Component {
   // this is just mock data to store messages
   constructor(props) {
@@ -34,6 +37,40 @@ export default class Chat extends React.Component {
     this.referenceChatMessages = firebase.firestore().collection("messages");
     this.referenceMessageUser = null;
   }
+
+   //Async Functions
+   //get current messages in the client-storage
+   async getMessages() {
+    let messages = '';
+    try {
+      messages = await AsyncStorage.getItem('messages') || [];
+      this.setState({
+        messages: JSON.parse(messages)
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  //save sent messages in the client-storage
+  async saveMessages() {
+    try {
+      await AsyncStorage.setItem('messages', JSON.stringify(this.state.messages));
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+  //delete current storage messages (only development purposes)
+  async deleteMessages() {
+    try {
+      await AsyncStorage.removeItem('messages');
+      this.setState({
+        messages: []
+      })
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
    // after the chat component is mounted, we store these 2 messages as an example, changing the current state of messages (empty array)
    componentDidMount() {
     const name = this.props.route.params.name;
@@ -60,6 +97,7 @@ export default class Chat extends React.Component {
         .orderBy("createdAt", "desc")
         .onSnapshot(this.onCollectionUpdate);
     });
+    this.getMessages();
   }
 
   addMessage() {
@@ -72,6 +110,7 @@ export default class Chat extends React.Component {
       createdAt: message.createdAt,
       user: message.user
     });
+    this.saveMessages();
   }
    // appends new messages to the current list of messages.
    onSend(messages = []) {
