@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, KeyboardAvoidingView,  Text, Button, Platform } from 'react-native';
-import { GiftedChat, Bubble } from "react-native-gifted-chat";
+import { GiftedChat, Bubble, InputToolbar } from "react-native-gifted-chat";
 import {globalStyles} from '../styles/global';
 //firebase
 import firebase from "firebase";
@@ -76,7 +76,7 @@ export default class Chat extends React.Component {
    componentDidMount() {
     const name = this.props.route.params.name;
     this.props.navigation.setOptions({ title: name });
-
+    // logs if user is online or offline
     NetInfo.fetch().then(connection => {
       if (connection.isConnected) {
         console.log('online');
@@ -84,7 +84,7 @@ export default class Chat extends React.Component {
         console.log('offline');
       }
     });
-    
+    // if user not register, sign in anonymously
     this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
         firebase.auth().signInAnonymously();
@@ -108,7 +108,7 @@ export default class Chat extends React.Component {
     });
     this.getMessages();
   }
-
+  // add message to firebase
   addMessage() {
     const message = this.state.messages[0];
     // add the new messages to the collection
@@ -146,7 +146,18 @@ export default class Chat extends React.Component {
       />
     )
   }
-
+  // a function that disables the posibility to text when offline (see netinfo)
+  renderInputToolbar(props) {
+    if (this.state.isConnected == false) {
+    } else {
+      return(
+        <InputToolbar
+        {...props}
+        />
+      );
+    }
+  }
+  // listens for updates in firebase and render messages
   onCollectionUpdate = (querySnapshot) => {
     const messages = [];
     // go through each document
