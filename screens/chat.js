@@ -151,3 +151,5 @@ export default class Chat extends React.Component {
       )
    }
 }
+//Ignore all log yellow notifications
+console.disableYellowBox = true;
