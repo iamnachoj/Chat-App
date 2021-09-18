@@ -22,6 +22,7 @@ export default class Chat extends React.Component {
         _id: "",
         name: "",
       },
+      isConnected: false,
     };
 
     if (!firebase.apps.length) {
@@ -80,6 +81,9 @@ export default class Chat extends React.Component {
     NetInfo.fetch().then(connection => {
       if (connection.isConnected) {
         console.log('online');
+        this.setState({
+          isConnected: true
+        })
       } else {
         console.log('offline');
       }
@@ -203,6 +207,7 @@ export default class Chat extends React.Component {
         // onsend function
         onSend={(messages) => this.onSend(messages)}
         user={this.state.user}
+        renderInputToolbar={this.renderInputToolbar.bind(this)}
       />
        {/* this line bellow makes sure that any android version does not have issues with the keyboard taking the screen room and hidding the chat. */}
       { Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null}
